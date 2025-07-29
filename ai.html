@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HealthBot</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+  <link rel="stylesheet" href="AI.css"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #9CECFB, #65C7F7, #0052D4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    .bg-chat {
+      backdrop-filter: blur(20px);
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      width: 360px;
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .area-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bot-message, .user-message {
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      border-radius: 16px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    .bot-message {
+      background-color: rgba(255, 255, 255, 0.8);
+      align-self: flex-start;
+    }
+
+    .user-message {
+      background-color: #63E2DB;
+      color: #000;
+      align-self: flex-end;
+    }
+
+    .area-interaction {
+      padding: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .text-interaction {
+      display: flex;
+      gap: 10px;
+    }
+
+    #message {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    #send {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background-color: #181E2A;
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    #typing {
+      font-size: 13px;
+      font-style: italic;
+      color: white;
+      margin-bottom: 5px;
+      display: none;
+    }
+
+    .is-typing {
+      display: block !important;
+    }
+
+    @media screen and (max-width: 400px) {
+      .bg-chat {
+        width: 95%;
+        height: 95vh;
+      }
+    }
+
+    /* Back button style */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #181E2A;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+      background: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Back button with AI bot icon -->
+  <a href="index.html" class="back-button" title="Go back to Home">
+    <i class="fas fa-robot" style="font-size:18px;"></i>
+    ← Back
+  </a>
+
+  <div class="bg-chat">
+    <div id="area-messages" class="area-messages">
+      <!-- Messages will be appended here -->
+    </div>
+    <div id="area-interaction" class="area-interaction">
+      <p id="typing" class="no-typing">Bot is typing...</p>
+      <div class="text-interaction">
+        <input type="text" id="message" placeholder="Type your message...">
+        <button id="send" onclick="getData()"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/calc.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
+F

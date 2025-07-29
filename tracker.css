@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* light gray background */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+section#health-tracker {
+    background-color: #fff; /* white background */
+    padding: 2em;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd; /* light gray border */
+}
+
+h1 {
+    font-size: 24px;
+    margin-top: 0;
+    color: #337ab7; /* blue title */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-bottom: 10px;
+    color: #666; /* dark gray label */
+}
+
+input[type="number"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* rounded corners */
+}
+
+button[type="button"] {
+    background-color: #4CAF50; /* green button */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="button"]:hover {
+    background-color: #3e8e41; /* darker green on hover */
+}
+
+#health-data {
+    margin-top: 20px;
+}
+
+#bmi-category, #blood-pressure-category, #health-status {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #337ab7; /* blue text */
+}
+
+footer {
+    background-color: #333; /* dark gray footer */
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    clear: both;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Page</title>
+    <link rel="stylesheet" href="appointment.css">
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Book Your Appointment</h1>
+        <p>Get expert care and schedule your appointment today!</p>
+    </section>
+
+    <!-- Appointment Form Section -->
+    <section class="appointment-form">
+        <form id="appointment-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required><br><br>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required><br><br>
+
+            <label for="service">Service:</label>
+            <select id="service" name="service" required>
+                <option value="">Select Service</option>
+                <option value="Gen Medicine">Gen Medicine</option>
+                <option value="Gastro">Gastro</option>
+                <option value="Gynaecology">Gynaecology</option>
+                <option value="ENT">ENT</option>
+                <option value="Pulmonary">Pulmonary</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Urology">Urology</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Neuro">Neuro</option>
+            </select><br><br>
+
+            <input type="submit" value="Book Appointment">
+        </form>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024</p>
+    </footer>
+
+    <script>
+        const appointmentForm = document.getElementById('appointment-form');
+        appointmentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const service = document.getElementById('service').value;
+
+            const appointmentData = {
+                name: name,
+                email: email,
+                phone: phone,
+                date: date,
+                service: service
+            };
+
+            fetch('https://backend-docmate.onrender.com/appointments', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(appointmentData)
+})
+
+            .then(response => {
+                if (response.ok) {
+                    // Success message
+                    alert("Appointment booked successfully! Redirecting to payment...");
+
+                    // Redirect after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = 'pay.html';
+                    }, 3000); // 3 seconds delay
+                } else {
+                    alert("Failed to book appointment.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error connecting to server.");
+            });
+        });
+    </script>
+
+</body>
+</html>

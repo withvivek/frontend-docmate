@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Appointment Booking - Payment</title>
+  <style>
+    /* Reset some basic styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f0f4f8;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    /* Container for payment form section */
+    .payment-gateway {
+      max-width: 480px;
+      background: #fff;
+      margin: 30px auto;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .payment-gateway h2 {
+      text-align: center;
+      color: #0077cc;
+      margin-bottom: 25px;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    /* Form styles */
+    #payment-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    #payment-form input[type="text"],
+    #payment-form input[type="date"],
+    #payment-form input[type="month"],
+    #payment-form input[type="number"],
+    #payment-form select {
+      width: 100%;
+      padding: 10px 14px;
+      margin-bottom: 20px;
+      border: 1.8px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    #payment-form input[type="text"]:focus,
+    #payment-form input[type="date"]:focus,
+    #payment-form input[type="month"]:focus,
+    #payment-form input[type="number"]:focus,
+    #payment-form select:focus {
+      border-color: #0077cc;
+      outline: none;
+    }
+
+    /* Submit button */
+    #payment-form input[type="submit"] {
+      width: 100%;
+      background: #0077cc;
+      color: #fff;
+      padding: 14px 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,119,204,0.4);
+      transition: background 0.3s ease;
+    }
+
+    #payment-form input[type="submit"]:hover {
+      background: #005fa3;
+    }
+
+    /* Responsive */
+    @media (max-width: 520px) {
+      .payment-gateway {
+        padding: 20px;
+        margin: 20px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Payment Gateway Section -->
+  <section class="payment-gateway">
+    <h2>Payment Information</h2>
+    <form id="payment-form" autocomplete="off" novalidate>
+      <label for="payment-method">Payment Method:</label>
+      <select id="payment-method" name="payment-method" required>
+        <option value="card">Credit/Debit Card</option>
+        <option value="upi">UPI</option>
+      </select>
+
+      <!-- Card Payment Details -->
+      <div id="card-payment-details">
+        <label for="card-type">Card Type:</label>
+        <select id="card-type" name="card-type" required>
+          <option value="visa">Visa</option>
+          <option value="mastercard">Credit card</option>
+          <option value="amex">Debit card</option>
+        </select>
+
+        <label for="card-number">Card Number:</label>
+        <input
+          type="text"
+          id="card-number"
+          name="card-number"
+          placeholder="1234-5678-9012-3456"
+          required
+          pattern="\d{4}-\d{4}-\d{4}-\d{4}"
+          title="Format: 1234-5678-9012-3456"
+        />
+
+        <label for="expiration-date">Expiration Date:</label>
+        <input
+          type="month"
+          id="expiration-date"
+          name="expiration-date"
+          required
+          min="2023-01"
+        />
+
+        <label for="cvv">CVV:</label>
+        <input
+          type="text"
+          id="cvv"
+          name="cvv"
+          placeholder="123"
+          maxlength="4"
+          pattern="\d{3,4}"
+          required
+          title="3 or 4 digit CVV"
+        />
+
+        <label for="card-holder-name">Card Holder Name:</label>
+        <input
+          type="text"
+          id="card-holder-name"
+          name="card-holder-name"
+          placeholder="John Doe"
+          required
+        />
+
+        <label for="billing-address">Billing Address:</label>
+        <input
+          type="text"
+          id="billing-address"
+          name="billing-address"
+          placeholder="123 Main St, Anytown, USA"
+          required
+        />
+      </div>
+
+      <!-- UPI Payment Details -->
+      <div id="upi-payment-details" style="display:none;">
+        <label for="upi-id">UPI ID:</label>
+        <input
+          type="text"
+          id="upi-id"
+          name="upi-id"
+          placeholder="yourUPIid@bankname"
+          required
+          pattern=".+@.+"
+          title="Enter a valid UPI ID"
+        />
+
+        <label for="upi-amount">Amount:</label>
+        <input
+          type="number"
+          id="upi-amount"
+          name="upi-amount"
+          placeholder="100.00"
+          min="1"
+          step="0.01"
+          required
+        />
+      </div>
+
+      <input type="submit" value="Make Payment" />
+    </form>
+  </section>
+
+  <script>
+    const paymentMethodSelect = document.getElementById('payment-method');
+    const cardPaymentDetails = document.getElementById('card-payment-details');
+    const upiPaymentDetails = document.getElementById('upi-payment-details');
+    const paymentForm = document.getElementById('payment-form');
+
+    // Toggle visibility of payment details based on selected method
+    paymentMethodSelect.addEventListener('change', () => {
+      if (paymentMethodSelect.value === 'card') {
+        cardPaymentDetails.style.display = 'block';
+        upiPaymentDetails.style.display = 'none';
+
+        // Set required attributes accordingly
+        setRequired(cardPaymentDetails, true);
+        setRequired(upiPaymentDetails, false);
+      } else if (paymentMethodSelect.value === 'upi') {
+        cardPaymentDetails.style.display = 'none';
+        upiPaymentDetails.style.display = 'block';
+
+        setRequired(cardPaymentDetails, false);
+        setRequired(upiPaymentDetails, true);
+      }
+    });
+
+    // Helper function to set required attribute for all inputs in a container
+    function setRequired(container, isRequired) {
+      const inputs = container.querySelectorAll('input, select');
+      inputs.forEach(input => {
+        if (isRequired) {
+          input.setAttribute('required', 'required');
+        } else {
+          input.removeAttribute('required');
+        }
+      });
+    }
+
+    // Initialize form with card details shown
+    window.addEventListener('load', () => {
+      paymentMethodSelect.dispatchEvent(new Event('change'));
+    });
+
+    // Handle form submission and send payment data to backend
+    paymentForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (!paymentForm.checkValidity()) {
+        paymentForm.reportValidity();
+        return;
+      }
+
+      const paymentData = {
+        method: paymentMethodSelect.value,
+        upiId: document.getElementById('upi-id').value || null,
+        cardType: document.getElementById('card-type') ? document.getElementById('card-type').value : null,
+        cardNumber: document.getElementById('card-number') ? document.getElementById('card-number').value : null,
+        expirationDate: document.getElementById('expiration-date') ? document.getElementById('expiration-date').value : null,
+        cvv: document.getElementById('cvv') ? document.getElementById('cvv').value : null,
+        cardHolderName: document.getElementById('card-holder-name') ? document.getElementById('card-holder-name').value : null,
+        billingAddress: document.getElementById('billing-address') ? document.getElementById('billing-address').value : null,
+        amount: paymentMethodSelect.value === 'upi' ? parseFloat(document.getElementById('upi-amount').value || 0) : null,
+      };
+
+      fetch("https://backend-docmate.onrender.com/api/payments", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(paymentData)
+})
+
+        .then(response => response.text())
+        .then(data => {
+          alert(data);
+          window.location.href = "success.html";  // Redirect on success
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("Payment failed");
+        });
+    });
+  </script>
+</body>
+</html>

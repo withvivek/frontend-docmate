@@ -1,0 +1,110 @@
+/* Global Styles */
+
+*{
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+  }
+    
+  body {
+    background-image: url('app\ \(2\).jpeg');
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  body {
+    background-image: url('appointment\ bg.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+  }
+    
+  h1, h2 {
+    font-weight: bold;
+    color: #2a2a2a;
+  }
+    
+  p {
+    margin-bottom: 20px;
+  }
+    
+    
+   
+    
+  .hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-align: center;
+    
+  }
+    
+  .hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+    
+   
+    
+  .appointment-form {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-image:url('appointmentform.jpeg');
+    background-color: #fff;
+    border: 3px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+    
+  .appointment-form h2 {
+    margin-top: 0;
+  }
+    
+  label {
+    display:grid;
+    margin-bottom: 10px;
+  }
+    
+  input[type="text"], input[type="email"], input[type="tel"], input[type="date"] {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+    
+  select {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+    
+  input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+    
+  input[type="submit"]:hover {
+    background-color: #2980b9;
+  }
+    
+  
+    
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    clear: both;
+  }
+    
+  footer p {
+    margin-bottom: 0;
+  }
